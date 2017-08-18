@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>        
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <title>Project 1</title>
+        <!-- Bootstrap core CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/theme.css" rel="stylesheet">
+        <link href="css/bootstrap-reset.css" rel="stylesheet">
+        <!--external css-->
+        <!-- Custom styles for this template -->
+        <link href="css/style.css" rel="stylesheet">
+        <link href="css/style-responsive.css" rel="stylesheet" />
+        <style>
+            p {text-align: justify; color: black ; font-size: 16px; line-height: 1.5}
+        </style>
+    </head>
+
+    <body>
+        <!--header start-->
+        <header class="header-frontend">
+            <div class="navbar navbar-default navbar-fixed-top" style="background-color: #e4e1ff">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="index.html">CSE 5694 - Robotics & AI - <span>Project 1</span></a>
+                    </div>
+                    <div class="navbar-collapse collapse ">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="index.html">Home</a></li>
+                            <li><a href="kinematics.html">Kinematics</a></li>                        
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!--header end-->  
+
+        <!--container start-->
+        <div class="container" style="padding-top: 6%">
+            <div class="row">
+                <!--feature start-->
+                <div class="col-sm-5">
+                    <img  src="img/FIT-Logo.jpg">
+                </div>
+                <div class="text-right feature-head col-sm-7">
+                    <h3>Term: Spring 2017<br><br>
+                        Instructor: Marius C. Silaghi <br><br>
+                        Team Members: Roger Ballard, Zubin Kadva, Zongqiao Liu</h3>                    
+                </div>  
+            </div>
+        </div>
+        <div class="container" style="padding-bottom: 10%">
+            <div class="row">
+                <!--feature end-->
+
+                <div class="feature-head"><h1>Problem Description</h1></div>
+                <p>
+                    On the table of our R12 robotic arm there exists a cuboid 
+                    of height 1000 (10 cm), width 700 (7cm) and length 1100 
+                    (11cm). Plan the robotic arm to inspect the object from 
+                    all reachable sides, taking pictures of each reachable 
+                    1x1cm2 from a 3 cm distance . (Only the front and top 
+                    of the object are reachable.)  Use the TMOVETO command, 
+                    and implement an inverse kinematics function to convert 
+                    these to AJMA commands.
+                </p>
+
+                <div class="feature-head"><h1>Background</h1></div>
+                <div class="col-lg-6 col-sm-6">
+                    <img style="width: 100%" src="http://www.robotshop.com/media/files/images2/st-robotics-r12-5-axis-articulated-robot-arm-desc1.jpg">
+                </div>
+                <div class="col-lg-6 col-sm-6 ">
+                    <p>
+                        1 cm = 100 robot units<br><br>
+                        1 degree = 100 robot units<br><br>
+                        The object is placed at 0 degrees with respect to the 0x and 90 degrees for 0y axes and with the center of the top back side at -4500 0 0. It's position is:<br>
+                        -4500, 550, -1000; <br>
+                        -4500, -550, -1000; <br>
+                        -3800, -550, -1000.<br><br>
+                        HAND_LENGTH = 1000;<br><br>
+                        CAPTURE_DISTANCE = 300;<br><br>
+                        CAPTURE_OFFSET = HAND_LENGTH + CAPTURE_DISTANCE;<br><br>
+                        CAPTURE_DIAMETER = 100;<br><br>
+                        CAPTURE_RADIUS = CAPTURE_DIAMETER / 2;
+                    </p>
+                </div>
+
+                <div class="feature-head"><h1>Commands</h1></div>
+                <p>
+                    Typically, the starting position of the arm is straight upward (0 0 5000). You can always return to this position with the command <b>HOME</b><br><br>
+                    The robotic arm holds a camera that can take pictures on the command: <b>x CAPTURE</b>., where <b>x</b> is an integer number.<br><br>
+                    To move the wrist joint of the robot to a position, we use the command:
+                </p>
+                <p class="text-center"><b>&lt;HAND> &lt;WRIST> &lt;X> &lt;Y> &lt;Z> TMOVETO</b></p><br>
+                <p>To move the arm to a position by specifying the angle of each joint, we use the command:</p>
+                <p class="text-center"><b>&lt;HAND_ANGLE> &lt;WRIST_ANGLE> &lt;ELBOW_ANGLE> &lt;SHOULDER_ANGLE> &lt;WAIST_ANGLE> AJMA</b></p><br>
+                <p>The robot is controlled by sending the above commands either through a <a href="https://debatedecide.fit.edu/robot.php?o=369">web interface</a> or via a GET request using the URL </p>
+                <p class="text-center"><b>http://debatedecide.fit.edu/robot.php?o=369&m=Y&p=%lt;PASSWORD>&c=&lt;COMMAND></b></p><br>
+                <p>After an image is captured, it can be accessed via the URL</p>
+                <p class="text-center"><b>http://debatedecide.fit.edu/robot/&lt;IMAGE>.bmp</b></p>    
+
+                <div class="feature-head"><h1>Methodology</h1></div>
+                <p>
+                    Since the position of the object was known beforehand, for this project we were able to simply create a program that would output the predetermined locations we needed to take images from. Thought was put into making the movement of the arm efficient, and to ensuring that the arm didn't hit the object being scanned. (Two additional command were added to the sequence to ensure this.)<br><br>
+                    Additionally, we created kinematics and inverse kinematics functions, which will be used in future projects. A description of the derivation of these functions is available <a href="kinematics.html">here.</a>
+                </p>
+
+                <div class="feature-head"><h1><a href="https://drive.google.com/open?id=0BxUfHPjPlAhCN2tGYlhRQ2VOMEk">Source Code</a></h1></div>
+                <p>This code has been written using the Java programming language.</p><br><br>
+                <iframe align="center" frameborder="10" style="width: 55%; height: 575px; display: block; margin: auto" aria-label="Drive folder, src" src="https://drive.google.com/embeddedfolderview?authuser=1&amp;id=0B_RH_jV9CzFiOS03Y1Nua01xV2c#list" allowfullscreen></iframe>
+                <br><br>
+
+                <div class="feature-head"><h1>Image Outputs</h1></div>
+                <p>A sequence of images have been captured of each reachable square cm. These images are captured using the TOMOVETO and AJMA commands. This sequence scans the FRONT and TOP of the object.</p>                
+                <div class="col-lg-6 col-sm-6 ">
+                    <h3>TMOVETO</h3>
+                    <h4><a href="https://drive.google.com/open?id=0BxUfHPjPlAhCelVOY1JtSlRQNzg">FRONT</a></h4>
+                    <h4><a href="https://drive.google.com/open?id=0BxUfHPjPlAhCTGxBT2h5d0xNS3M">TOP</a></h4>                
+                </div>
+                <div class="col-lg-6 col-sm-6 ">
+                    <h3>AJMA</h3>
+                    <h4><a href="https://drive.google.com/open?id=0BxUfHPjPlAhCWnRoNWQyY2xaaDQ">FRONT</a></h4>
+                    <h4><a href="https://drive.google.com/open?id=0BxUfHPjPlAhCdU9CNERFbndLR1E">TOP</a></h4>
+                </div>
+
+            </div>
+        </div>
+        
+    </body>
+</html>
