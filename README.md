@@ -7,7 +7,7 @@ Spring 2017, MS Computer Science, Florida Institute of Technology
 - Learning to use the R12 robotic arm
 - Capture an object from 2 angles - above and side using TMOVETO and AJMA commands
 
-## Technolgies
+## Technolgies?
 - Java
 
 *This project is a combined effort from Roger, Zongqiao and me*
